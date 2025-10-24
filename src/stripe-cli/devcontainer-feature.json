@@ -1,0 +1,19 @@
+{
+    "name": "Stripe CLI",
+    "id": "stripe-cli",
+    "version": "1.0.0",
+    "description": "Installs the Stripe CLI for interacting with Stripe APIs",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select the version of Stripe CLI to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "stripe-cli-latest": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "stripe-cli": {
+                "version": "latest"
+            }
+        }
+    }
+}
