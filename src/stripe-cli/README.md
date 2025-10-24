@@ -7,7 +7,7 @@ Installs the Stripe CLI for interacting with Stripe APIs
 
 ```json
 "features": {
-    "ghcr.io/siri404/stripe-cli/stripe-cli:1": {}
+    "ghcr.io/siri404/devcontainers/stripe-cli:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ Installs the Stripe CLI for interacting with Stripe APIs
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/stripe-cli/blob/main/src/stripe-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/devcontainers/blob/main/src/stripe-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

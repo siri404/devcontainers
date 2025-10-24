@@ -7,7 +7,7 @@ A hello world feature
 
 ```json
 "features": {
-    "ghcr.io/siri404/stripe-cli/hello:1": {}
+    "ghcr.io/siri404/devcontainers/hello:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ A hello world feature
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/stripe-cli/blob/main/src/hello/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/devcontainers/blob/main/src/hello/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
