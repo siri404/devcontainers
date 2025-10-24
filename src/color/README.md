@@ -7,7 +7,7 @@ A feature to remind you of your favorite color
 
 ```json
 "features": {
-    "ghcr.io/siri404/stripe-cli/color:1": {}
+    "ghcr.io/siri404/devcontainers/color:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ A feature to remind you of your favorite color
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/stripe-cli/blob/main/src/color/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/siri404/devcontainers/blob/main/src/color/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
