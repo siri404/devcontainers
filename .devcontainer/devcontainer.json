@@ -18,7 +18,10 @@
         }
     },
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/siri404/devcontainers/stripe-cli:1": {},
+        "ghcr.io/siri404/devcontainers/postgresql-cli:1": {},
+        "ghcr.io/siri404/devcontainers/redis-cli:1": {}
     },
     "remoteUser": "node",
     "updateContentCommand": "npm install -g @devcontainers/cli"

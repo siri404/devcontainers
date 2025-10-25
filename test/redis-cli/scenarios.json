@@ -1,0 +1,26 @@
+{
+    "redis-cli-latest": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "redis-cli": {
+                "version": "latest"
+            }
+        }
+    },
+    "redis-cli-7": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "redis-cli": {
+                "version": "7"
+            }
+        }
+    },
+    "redis-cli-6": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "redis-cli": {
+                "version": "6"
+            }
+        }
+    }
+}

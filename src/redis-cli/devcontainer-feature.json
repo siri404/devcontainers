@@ -1,0 +1,21 @@
+{
+    "name": "Redis CLI",
+    "id": "redis-cli",
+    "version": "1.0.0",
+    "description": "Installs Redis client tools (redis-cli, redis-benchmark, etc.)",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "7",
+                "6"
+            ],
+            "default": "latest",
+            "description": "Select the version of Redis client to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
