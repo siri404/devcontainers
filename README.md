@@ -6,7 +6,7 @@
 
 ## Example Contents
 
-This repository contains a _collection_ of four Features - `hello`, `color`, `stripe-cli`, and `postgresql-cli`. These Features serve as implementations for various development tools.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
+This repository contains a _collection_ of five Features - `hello`, `color`, `stripe-cli`, `postgresql-cli`, and `turborepo`. These Features serve as implementations for various development tools.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
 
 ### `hello`
 
@@ -96,6 +96,29 @@ psql (PostgreSQL) 18.0
 $ psql -h localhost -U postgres -d mydb
 ```
 
+### `turborepo`
+
+Installs Turborepo, a high-performance build system for JavaScript and TypeScript monorepos.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+    "features": {
+        "ghcr.io/devcontainers/feature-starter/turborepo:1": {
+            "version": "latest"
+        }
+    }
+}
+```
+
+```bash
+$ turbo --version
+
+2.5.8
+
+$ turbo build
+```
+
 ## Repo and Feature Structure
 
 Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder.  Each Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
@@ -112,6 +135,9 @@ Similar to the [`devcontainers/features`](https://github.com/devcontainers/featu
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 │   ├── postgresql-cli
+│   │   ├── devcontainer-feature.json
+│   │   └── install.sh
+│   ├── turborepo
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 |   ├── ...

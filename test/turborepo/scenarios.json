@@ -1,0 +1,20 @@
+{
+    "turborepo-with-node": {
+        "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+        "features": {
+            "turborepo": {
+                "version": "latest"
+            }
+        }
+    },
+    "turborepo-base-image": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "turborepo": {
+                "version": "latest"
+            }
+        }
+    }
+}
+

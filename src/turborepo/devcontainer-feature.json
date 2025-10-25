@@ -1,0 +1,21 @@
+{
+    "name": "Turborepo",
+    "id": "turborepo",
+    "version": "1.0.0",
+    "description": "Installs Turborepo, a high-performance build system for JavaScript and TypeScript codebases",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select the version of Turborepo to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
+
