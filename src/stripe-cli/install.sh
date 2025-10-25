@@ -86,27 +86,29 @@ detect_architecture() {
 }
 
 # Function to install via apt (Debian/Ubuntu)
+# Based on official docs: https://docs.stripe.com/stripe-cli/install?install-method=apt
 install_via_apt() {
-    echo "Installing Stripe CLI via apt..."
+    echo "Installing Stripe CLI via apt (official method)..."
     
-    # Ensure /etc/apt/keyrings directory exists
+    # Ensure /etc/apt/keyrings directory exists (required for signed repositories)
     mkdir -p /etc/apt/keyrings
     
     # Add Stripe's GPG key with retry logic
+    # Official source: https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public
     local retry=0
     local max_retries=3
     while [ $retry -lt $max_retries ]; do
         if curl -fsSL --retry 3 --retry-delay 2 https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | \
            gpg --dearmor --yes -o /etc/apt/keyrings/stripe.gpg 2>/dev/null; then
-            echo "Successfully added Stripe GPG key"
+            echo "✓ Successfully added Stripe GPG key"
             break
         fi
         retry=$((retry + 1))
         if [ $retry -lt $max_retries ]; then
-            echo "Failed to add GPG key, retrying ($retry/$max_retries)..."
+            echo "⚠ Failed to add GPG key, retrying ($retry/$max_retries)..."
             sleep 2
         else
-            echo "Failed to add GPG key after $max_retries attempts"
+            echo "✗ Failed to add GPG key after $max_retries attempts"
             return 1
         fi
     done
@@ -114,48 +116,54 @@ install_via_apt() {
     # Set proper permissions on the GPG key
     chmod 644 /etc/apt/keyrings/stripe.gpg
     
-    # Add Stripe's apt repository
+    # Add Stripe's official apt repository
+    # Repository: https://packages.stripe.dev/stripe-cli-debian-local
     echo "deb [signed-by=/etc/apt/keyrings/stripe.gpg] https://packages.stripe.dev/stripe-cli-debian-local stable main" | \
         tee /etc/apt/sources.list.d/stripe.list >/dev/null
     
+    echo "✓ Added Stripe apt repository"
+    
     # Update package list
     if ! apt-get update -y 2>/dev/null; then
-        echo "Warning: apt-get update failed, cleaning up and retrying..."
+        echo "⚠ Warning: apt-get update failed, cleaning up and retrying..."
         rm -f /etc/apt/sources.list.d/stripe.list
         apt-get update -y
         return 1
     fi
     
-    # Install stripe
+    # Install stripe package
     if apt-get install -y --no-install-recommends stripe; then
-        echo "Successfully installed Stripe CLI via apt"
+        echo "✓ Successfully installed Stripe CLI via apt"
         return 0
     else
-        echo "Failed to install via apt"
+        echo "✗ Failed to install via apt"
         return 1
     fi
 }
 
 # Function to install via direct binary download (fallback)
+# Downloads from official GitHub releases: https://github.com/stripe/stripe-cli/releases
 install_via_binary() {
-    echo "Installing Stripe CLI via direct binary download..."
+    echo "Installing Stripe CLI via direct binary download (fallback method)..."
     
     # Determine OS for download
     local os_type=$(uname -s | tr '[:upper:]' '[:lower:]')
     
-    # Determine download URL
+    # Determine download URL based on version
     local download_url
     if [ "$VERSION" = "latest" ]; then
         download_url="https://github.com/stripe/stripe-cli/releases/latest/download/stripe_${os_type}_${ARCHITECTURE}.tar.gz"
+        echo "→ Fetching latest version from GitHub releases"
     else
         # Remove 'v' prefix if present
         local clean_version="${VERSION#v}"
         download_url="https://github.com/stripe/stripe-cli/releases/download/v${clean_version}/stripe_${os_type}_${ARCHITECTURE}.tar.gz"
+        echo "→ Fetching version v${clean_version} from GitHub releases"
     fi
     
-    echo "Downloading from: $download_url"
+    echo "→ Download URL: $download_url"
     
-    # Create temporary directory
+    # Create temporary directory with cleanup trap
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
     
@@ -166,42 +174,43 @@ install_via_binary() {
     local max_retries=3
     while [ $retry -lt $max_retries ]; do
         if curl -fsSL --retry 3 --retry-delay 2 "$download_url" -o stripe.tar.gz; then
-            echo "Successfully downloaded Stripe CLI"
+            echo "✓ Successfully downloaded Stripe CLI archive"
             break
         fi
         retry=$((retry + 1))
         if [ $retry -lt $max_retries ]; then
-            echo "Download failed, retrying ($retry/$max_retries)..."
+            echo "⚠ Download failed, retrying ($retry/$max_retries)..."
             sleep 2
         else
-            echo "Failed to download after $max_retries attempts"
+            echo "✗ Failed to download after $max_retries attempts"
+            echo "  Please check: https://github.com/stripe/stripe-cli/releases"
             return 1
         fi
     done
     
     # Verify the downloaded file
     if [ ! -f stripe.tar.gz ] || [ ! -s stripe.tar.gz ]; then
-        echo "Error: Downloaded file is missing or empty"
+        echo "✗ Error: Downloaded file is missing or empty"
         return 1
     fi
     
     # Extract the archive
     if ! tar -xzf stripe.tar.gz 2>/dev/null; then
-        echo "Error: Failed to extract archive"
+        echo "✗ Error: Failed to extract archive"
         return 1
     fi
     
     # Verify the binary exists
     if [ ! -f stripe ]; then
-        echo "Error: stripe binary not found in archive"
+        echo "✗ Error: stripe binary not found in archive"
         return 1
     fi
     
-    # Install the binary
+    # Install the binary to /usr/local/bin
     mv stripe /usr/local/bin/stripe
     chmod +x /usr/local/bin/stripe
     
-    echo "Successfully installed Stripe CLI via binary download"
+    echo "✓ Successfully installed Stripe CLI via binary download"
     return 0
 }
 
@@ -288,7 +297,17 @@ main() {
         exit 1
     fi
     
+    echo ""
     echo "✓ Stripe CLI feature installation complete!"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "  To authenticate with Stripe, run:"
+    echo "    stripe login"
+    echo ""
+    echo "  For more information, visit:"
+    echo "    https://docs.stripe.com/stripe-cli"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
 }
 
 # Run main function
