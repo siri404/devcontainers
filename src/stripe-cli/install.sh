@@ -23,7 +23,11 @@ if command_exists stripe; then
 fi
 
 echo "Installing prerequisites..."
-apt-get update -y
+if ! apt-get update -y; then
+    echo "Warning: apt-get update failed on first attempt, retrying..."
+    sleep 2
+    apt-get update -y
+fi
 
 # Install required dependencies
 PACKAGES_NEEDED="curl ca-certificates gnupg2"
@@ -33,9 +37,11 @@ apt-get install -y --no-install-recommends $PACKAGES_NEEDED
 echo "Adding Stripe GPG key..."
 mkdir -p /etc/apt/keyrings
 
-if ! curl -fsSL --retry 3 https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public \
-    | gpg --dearmor -o /etc/apt/keyrings/stripe.gpg 2>/dev/null; then
+# Download GPG key with better error handling
+if ! curl -fsSL --retry 3 --retry-delay 2 https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public \
+    | gpg --dearmor -o /etc/apt/keyrings/stripe.gpg 2>&1; then
     echo "Error: Failed to download Stripe GPG key"
+    echo "Please check your internet connection and try again"
     exit 1
 fi
 
@@ -69,19 +75,4 @@ fi
 
 INSTALLED_VERSION=$(stripe --version 2>&1 | head -n1)
 echo "✓ Successfully installed: $INSTALLED_VERSION"
-
-# Optional: Clean up apt cache to reduce image size
-apt-get clean
-rm -rf /var/lib/apt/lists/*
-
-echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Stripe CLI installation complete!"
-echo ""
-echo "  To authenticate, run:"
-echo "    stripe login"
-echo ""
-echo "  Documentation:"
-echo "    https://docs.stripe.com/stripe-cli"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
+echo "✓ Stripe CLI installation complete!"
