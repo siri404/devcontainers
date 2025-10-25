@@ -6,7 +6,7 @@
 
 ## Example Contents
 
-This repository contains a _collection_ of five Features - `hello`, `color`, `stripe-cli`, `postgresql-cli`, and `turborepo`. These Features serve as implementations for various development tools.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
+This repository contains a _collection_ of seven Features - `hello`, `color`, `stripe-cli`, `postgresql-cli`, `turborepo`, `prisma-cli`, and `vercel-cli`. These Features serve as implementations for various development tools.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
 
 ### `hello`
 
@@ -119,6 +119,56 @@ $ turbo --version
 $ turbo build
 ```
 
+### `prisma-cli`
+
+Installs Prisma CLI for database schema management, migrations, and type-safe database access.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+    "features": {
+        "ghcr.io/devcontainers/feature-starter/prisma-cli:1": {
+            "version": "latest"
+        }
+    }
+}
+```
+
+```bash
+$ prisma --version
+
+prisma : 6.18.0
+
+$ prisma init
+$ prisma migrate dev
+$ prisma studio
+```
+
+### `vercel-cli`
+
+Installs Vercel CLI for deploying and managing applications on Vercel's cloud platform.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+    "features": {
+        "ghcr.io/devcontainers/feature-starter/vercel-cli:1": {
+            "version": "latest"
+        }
+    }
+}
+```
+
+```bash
+$ vercel --version
+
+Vercel CLI 48.6.0
+
+$ vercel login
+$ vercel
+$ vercel --prod
+```
+
 ## Repo and Feature Structure
 
 Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder.  Each Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
@@ -138,6 +188,12 @@ Similar to the [`devcontainers/features`](https://github.com/devcontainers/featu
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 │   ├── turborepo
+│   │   ├── devcontainer-feature.json
+│   │   └── install.sh
+│   ├── prisma-cli
+│   │   ├── devcontainer-feature.json
+│   │   └── install.sh
+│   ├── vercel-cli
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 |   ├── ...

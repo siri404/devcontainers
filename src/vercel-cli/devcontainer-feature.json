@@ -1,0 +1,21 @@
+{
+    "name": "Vercel CLI",
+    "id": "vercel-cli",
+    "version": "1.0.0",
+    "description": "Installs Vercel CLI for deploying applications to Vercel",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select the version of Vercel CLI to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
+

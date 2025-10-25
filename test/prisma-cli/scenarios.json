@@ -1,0 +1,20 @@
+{
+    "prisma-cli-with-node": {
+        "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+        "features": {
+            "prisma-cli": {
+                "version": "latest"
+            }
+        }
+    },
+    "prisma-cli-base-image": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "prisma-cli": {
+                "version": "latest"
+            }
+        }
+    }
+}
+

@@ -1,0 +1,20 @@
+{
+    "vercel-cli-with-node": {
+        "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22",
+        "features": {
+            "vercel-cli": {
+                "version": "latest"
+            }
+        }
+    },
+    "vercel-cli-base-image": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "vercel-cli": {
+                "version": "latest"
+            }
+        }
+    }
+}
+

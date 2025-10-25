@@ -1,0 +1,21 @@
+{
+    "name": "Prisma CLI",
+    "id": "prisma-cli",
+    "version": "1.0.0",
+    "description": "Installs Prisma CLI for database schema management and migrations",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select the version of Prisma CLI to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
+
