@@ -1,0 +1,24 @@
+{
+    "name": "PostgreSQL CLI",
+    "id": "postgresql-cli",
+    "version": "1.0.0",
+    "description": "Installs PostgreSQL client tools (psql, pg_dump, etc.)",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "16",
+                "15",
+                "14",
+                "13",
+                "12"
+            ],
+            "default": "latest",
+            "description": "Select the version of PostgreSQL client to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

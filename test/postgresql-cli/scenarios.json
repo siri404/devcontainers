@@ -1,0 +1,26 @@
+{
+    "postgresql-cli-latest": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "postgresql-cli": {
+                "version": "latest"
+            }
+        }
+    },
+    "postgresql-cli-16": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "postgresql-cli": {
+                "version": "16"
+            }
+        }
+    },
+    "postgresql-cli-15": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "postgresql-cli": {
+                "version": "15"
+            }
+        }
+    }
+}

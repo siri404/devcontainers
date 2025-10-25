@@ -6,7 +6,7 @@
 
 ## Example Contents
 
-This repository contains a _collection_ of three Features - `hello`, `color`, and `stripe-cli`. These Features serve as simple feature implementations.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
+This repository contains a _collection_ of four Features - `hello`, `color`, `stripe-cli`, and `postgresql-cli`. These Features serve as implementations for various development tools.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
 
 ### `hello`
 
@@ -73,6 +73,29 @@ stripe version X.Y.Z
 $ stripe listen --forward-to localhost:3000/webhook
 ```
 
+### `postgresql-cli`
+
+Installs PostgreSQL CLI tools (psql, pg_dump, pg_restore, etc.) for interacting with PostgreSQL databases.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/feature-starter/postgresql-cli:1": {
+            "version": "latest"
+        }
+    }
+}
+```
+
+```bash
+$ psql --version
+
+psql (PostgreSQL) 18.0
+
+$ psql -h localhost -U postgres -d mydb
+```
+
 ## Repo and Feature Structure
 
 Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder.  Each Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
@@ -86,6 +109,9 @@ Similar to the [`devcontainers/features`](https://github.com/devcontainers/featu
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 │   ├── stripe-cli
+│   │   ├── devcontainer-feature.json
+│   │   └── install.sh
+│   ├── postgresql-cli
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 |   ├── ...
