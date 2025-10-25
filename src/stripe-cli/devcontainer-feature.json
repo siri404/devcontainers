@@ -1,7 +1,7 @@
 {
     "name": "Stripe CLI",
     "id": "stripe-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Installs the Stripe CLI for interacting with Stripe APIs",
     "options": {
         "version": {
