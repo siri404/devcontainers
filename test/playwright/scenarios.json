@@ -1,0 +1,31 @@
+{
+    "playwright-default": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "playwright": {
+                "version": "latest",
+                "browsers": "all"
+            }
+        }
+    },
+    "playwright-chromium-only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "playwright": {
+                "version": "latest",
+                "browsers": "chromium"
+            }
+        }
+    },
+    "playwright-specific-version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "playwright": {
+                "version": "1.40"
+            }
+        }
+    }
+}

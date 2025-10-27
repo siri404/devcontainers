@@ -1,0 +1,41 @@
+{
+    "name": "Playwright",
+    "id": "playwright",
+    "version": "1.0.0",
+    "description": "Installs Playwright for end-to-end testing with browser automation",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "1.40",
+                "1.39",
+                "1.38"
+            ],
+            "default": "latest",
+            "description": "Select the version of Playwright to install"
+        },
+        "browsers": {
+            "type": "string",
+            "enum": [
+                "all",
+                "chromium",
+                "firefox",
+                "webkit",
+                "chromium firefox",
+                "chromium webkit"
+            ],
+            "default": "all",
+            "description": "Which browsers to install (chromium, firefox, webkit, or 'all')"
+        },
+        "installDependencies": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install system dependencies required by browsers"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
